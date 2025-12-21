@@ -19,6 +19,8 @@ function App() {
 
   const [todos, setTodos] = useState<Todo[]>(initialTodos)
 
+  const [filter, steFilter] = useState<Priority | "Tous">("Tous")
+
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos))
   }, [todos])
@@ -39,6 +41,14 @@ function App() {
 
     setInput("")
     setPriority("Moyenne")
+  }
+
+  let filteredTodos: Todo[] = [];
+
+  if(filter === "Tous") {
+    filteredTodos = todos
+  } else {
+    filteredTodos = todos.filter((todo) => todo.priority === filter)
   }
 
   return (
@@ -72,6 +82,27 @@ function App() {
               Ajouter
             </button>
 
+          </div>
+          <div className="space-y-2 flex-1 h-fit">
+            <div className="flex flex-wrap gap-4">
+              <button
+                className={`btn btn-soft ${filter === "Tous" ? "btn-primary" : ""}`}
+                onClick={() => steFilter("Tous")}
+              >
+                Tous
+              </button>
+            </div>
+
+            {filteredTodos.length > 0 ? (
+              <ul className="divide-y divide-primary/20">
+                {filteredTodos.map((todo) => (
+                  <li>{todo.text}</li>
+                ))}
+              </ul>
+            ) : (
+              <div>
+              </div>
+            )}
           </div>
         </div>
       </div>
