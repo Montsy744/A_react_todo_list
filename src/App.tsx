@@ -57,6 +57,11 @@ function App() {
   const lowCount = todos.filter((t)=> t.priority === "Basse").length
   const totalCount = todos.length
 
+  function deleteTodo (id : number) {
+    const newTodos = todos.filter((todo) => todo.id !== id)
+    setTodos(newTodos)
+  }
+
   return (
     <>
       <div className="flex justify-center">
@@ -99,19 +104,19 @@ function App() {
               </button>
               <button
                 className={`btn btn-soft ${filter === "Urgente" ? "btn-primary" : ""}`}
-                onClick={() => steFilter("Tous")}
+                onClick={() => steFilter("Urgente")}
               >
                 Urgent ({urgentCount})
               </button>
               <button
                 className={`btn btn-soft ${filter === "Moyenne" ? "btn-primary" : ""}`}
-                onClick={() => steFilter("Tous")}
+                onClick={() => steFilter("Moyenne")}
               >
                 Moyenne ({mediumCount})
               </button>
               <button
                 className={`btn btn-soft ${filter === "Basse" ? "btn-primary" : ""}`}
-                onClick={() => steFilter("Tous")}
+                onClick={() => steFilter("Basse")}
               >
                 Basse ({lowCount})
               </button>
@@ -121,7 +126,7 @@ function App() {
               <ul className="divide-y divide-primary/20">
                 {filteredTodos.map((todo) => (
                   <li key={todo.id}>
-                    <TodoItem todo={todo}/>
+                    <TodoItem todo={todo} onDelete={() => deleteTodo(todo.id)}/>
                   </li>
                 ))}
               </ul>
