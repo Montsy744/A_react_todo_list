@@ -52,6 +52,11 @@ function App() {
     filteredTodos = todos.filter((todo) => todo.priority === filter)
   }
 
+  const urgentCount = todos.filter((t)=> t.priority === "Urgente").length
+  const mediumCount = todos.filter((t)=> t.priority === "Moyenne").length
+  const lowCount = todos.filter((t)=> t.priority === "Basse").length
+  const totalCount = todos.length
+
   return (
     <>
       <div className="flex justify-center">
@@ -90,7 +95,25 @@ function App() {
                 className={`btn btn-soft ${filter === "Tous" ? "btn-primary" : ""}`}
                 onClick={() => steFilter("Tous")}
               >
-                Tous
+                Tous ({totalCount})
+              </button>
+              <button
+                className={`btn btn-soft ${filter === "Urgente" ? "btn-primary" : ""}`}
+                onClick={() => steFilter("Tous")}
+              >
+                Urgent ({urgentCount})
+              </button>
+              <button
+                className={`btn btn-soft ${filter === "Moyenne" ? "btn-primary" : ""}`}
+                onClick={() => steFilter("Tous")}
+              >
+                Moyenne ({mediumCount})
+              </button>
+              <button
+                className={`btn btn-soft ${filter === "Basse" ? "btn-primary" : ""}`}
+                onClick={() => steFilter("Tous")}
+              >
+                Basse ({lowCount})
               </button>
             </div>
 
