@@ -97,7 +97,9 @@ function App() {
             {filteredTodos.length > 0 ? (
               <ul className="divide-y divide-primary/20">
                 {filteredTodos.map((todo) => (
-                  <TodoItem todo={todo}/>
+                  <li key={todo.id}>
+                    <TodoItem todo={todo}/>
+                  </li>
                 ))}
               </ul>
             ) : (
