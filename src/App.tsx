@@ -63,6 +63,31 @@ function App() {
     setTodos(newTodos)
   }
 
+  const [selectedTodos, setSelectedTodos] = useState<Set<number>>(new Set())
+
+  function toggleSelectedTodo(id : number) {
+    const newSelected = new Set(selectedTodos)
+    if(newSelected.has(id)) {
+      newSelected.delete(id)
+    } else {
+      newSelected.add(id)
+    }
+
+    setSelectedTodos(newSelected)
+  }
+
+  function finisSelected() {
+    const newTodos = todos.filter((todo) => {
+      if(selectedTodos.has(todo.id)) {
+        return false
+      } else {
+        return true
+      }
+    })
+
+    setTodos(newTodos)
+    setSelectedTodos(new Set())
+  }
   return (
     <>
       <div className="flex justify-center">
@@ -96,38 +121,54 @@ function App() {
 
           </div>
           <div className="space-y-2 flex-1 h-fit">
-            <div className="flex flex-wrap gap-4">
-              <button
-                className={`btn btn-soft ${filter === "Tous" ? "btn-primary" : ""}`}
-                onClick={() => steFilter("Tous")}
+            <div className="flex items-center justify-between">
+              <div className="flex flex-wrap gap-4">
+                <button
+                  className={`btn btn-soft ${filter === "Tous" ? "btn-primary" : ""}`}
+                  onClick={() => steFilter("Tous")}
+                >
+                  Tous ({totalCount})
+                </button>
+                <button
+                  className={`btn btn-soft ${filter === "Urgente" ? "btn-primary" : ""}`}
+                  onClick={() => steFilter("Urgente")}
+                >
+                  Urgent ({urgentCount})
+                </button>
+                <button
+                  className={`btn btn-soft ${filter === "Moyenne" ? "btn-primary" : ""}`}
+                  onClick={() => steFilter("Moyenne")}
+                >
+                  Moyenne ({mediumCount})
+                </button>
+                <button
+                  className={`btn btn-soft ${filter === "Basse" ? "btn-primary" : ""}`}
+                  onClick={() => steFilter("Basse")}
+                >
+                  Basse ({lowCount})
+                </button>
+              </div>
+              <button 
+                className="btn btn-primary"
+                onClick={finisSelected}
+                disabled={selectedTodos.size == 0} // si il y a 0 todo select on ne peut pas click sur le btn
               >
-                Tous ({totalCount})
-              </button>
-              <button
-                className={`btn btn-soft ${filter === "Urgente" ? "btn-primary" : ""}`}
-                onClick={() => steFilter("Urgente")}
-              >
-                Urgent ({urgentCount})
-              </button>
-              <button
-                className={`btn btn-soft ${filter === "Moyenne" ? "btn-primary" : ""}`}
-                onClick={() => steFilter("Moyenne")}
-              >
-                Moyenne ({mediumCount})
-              </button>
-              <button
-                className={`btn btn-soft ${filter === "Basse" ? "btn-primary" : ""}`}
-                onClick={() => steFilter("Basse")}
-              >
-                Basse ({lowCount})
+                  Finir la selection ({selectedTodos.size})
               </button>
             </div>
+            
 
             {filteredTodos.length > 0 ? (
               <ul className="divide-y divide-primary/20">
                 {filteredTodos.map((todo) => (
                   <li key={todo.id}>
-                    <TodoItem todo={todo} onDelete={() => deleteTodo(todo.id)}/>
+                    <TodoItem 
+                      todo={todo} 
+                      isSelected={selectedTodos.has(todo.id)} 
+                      onDelete={() => deleteTodo(todo.id)}
+                      onToggleSelect={toggleSelectedTodo}
+                    />
+                      
                   </li>
                 ))}
               </ul>

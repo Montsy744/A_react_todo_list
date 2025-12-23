@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# A_react_todo_list
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Petit projet Todo List construit avec Vite, React et TypeScript.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Application minimaliste pour ajouter, marquer comme fait et supprimer des tâches.
 
-## React Compiler
+## Fonctionnalités
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Ajouter une tâche
+- Marquer/démarquer une tâche comme complétée
+- Supprimer une tâche
 
-## Expanding the ESLint configuration
+## Tech stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Vite
+- React
+- TypeScript
+- CSS
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Prérequis
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Node.js (>=14 recommandé)
+- npm (ou `pnpm`/`yarn`)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Installation
+
+1. Installer les dépendances:
+
+```
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Lancer le serveur de développement:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+npm run dev
+```
+
+3. Construire pour la production:
+
+```
+npm run build
+```
+
+## Structure du projet
+
+- [index.html](index.html)
+- [package.json](package.json)
+- [vite.config.ts](vite.config.ts)
+- [tsconfig.json](tsconfig.json)
+- [src/App.tsx](src/App.tsx)
+- [src/main.tsx](src/main.tsx)
+- [src/TodoItem.tsx](src/TodoItem.tsx)
+- [src/index.css](src/index.css)
+
+## Personnalisation
+
+Modifiez les composants dans le dossier `src/` pour adapter le comportement ou le style.
+
+## Contribuer
+
+Issues et PRs sont bienvenues. Décrivez la modification proposée et fournissez des étapes pour reproduire si nécessaire.
+
+## Licence
+
+Vérifiez `package.json` pour les informations de licence.
